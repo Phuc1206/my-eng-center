@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google';
 import { SessionProvider } from 'next-auth/react';
+import { Providers } from '../components/Providers';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
 		<html lang='vi' className={inter.className}>
 			<head></head>
 			<body className='font-sans'>
-				<SessionProvider>{children}</SessionProvider>
+				<SessionProvider>
+					<Providers>{children}</Providers>
+				</SessionProvider>
 			</body>
 		</html>
 	);

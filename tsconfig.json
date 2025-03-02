@@ -24,7 +24,8 @@
 		".next/types/**/*.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"tailwind.config.js"
+		"tailwind.config.js",
+		"src/app/api/auth/[...nextauth]/route.js"
 	],
 	"exclude": ["node_modules"]
 }

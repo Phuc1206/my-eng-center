@@ -8,7 +8,7 @@ export async function POST(req) {
 		// Kiểm tra dữ liệu đầu vào
 		if (!fullName || !email || !phone || !course) {
 			return Response.json(
-				{ error: 'Vui lòng nhập đầy đủ thông tin!' },
+				{ message: 'Vui lòng nhập đầy đủ thông tin!' },
 				{ status: 400 }
 			);
 		}
@@ -26,6 +26,6 @@ export async function POST(req) {
 		);
 	} catch (error) {
 		console.error('❌ Lỗi server:', error);
-		return Response.json({ error: 'Lỗi server!' }, { status: 500 });
+		return Response.json({ message: 'Lỗi server!' }, { status: 500 });
 	}
 }

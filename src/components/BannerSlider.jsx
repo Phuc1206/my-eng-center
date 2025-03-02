@@ -24,8 +24,8 @@ const BannerSlider = () => {
 					<Image
 						src='/images/english-learning.jpg'
 						alt='Học tiếng Anh'
-						layout='fill'
-						objectFit='contain'
+						fill
+						style={{ objectFit: 'cover' }}
 					/>
 				</SwiperSlide>
 
@@ -34,8 +34,8 @@ const BannerSlider = () => {
 					<Image
 						src='/images/english-learning.jpg'
 						alt='Lớp học tiếng Anh'
-						layout='fill'
-						objectFit='contain'
+						fill
+						style={{ objectFit: 'cover' }}
 					/>
 				</SwiperSlide>
 
@@ -44,8 +44,8 @@ const BannerSlider = () => {
 					<Image
 						src='/images/english-learning.jpg'
 						alt='Giáo viên hướng dẫn'
-						layout='fill'
-						objectFit='contain'
+						fill
+						style={{ objectFit: 'cover' }}
 					/>
 				</SwiperSlide>
 			</Swiper>

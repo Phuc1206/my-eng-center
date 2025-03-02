@@ -25,24 +25,25 @@ export default function Header() {
 					<a href='#' className='hover:text-black'>
 						Liên hệ
 					</a>
-					<button className='text-gray-700 hover:text-black'>
+					<button
+						className='text-gray-700 hover:text-black cursor-pointer'
+						onClick={() => setIsSearchOpen(true)}
+					>
 						<MagnifyingGlassIcon className='w-5 h-5 text-gray-700' />
 					</button>
 				</nav>
 
 				<div className='flex items-center space-x-4'>
-					{/* <a href='/login' className='text-gray-700 hover:text-black'>
-						Log in
-					</a>
-					<a href='#' className='bg-blue-500 text-white px-4 py-2 rounded-md'>
-						Sign up
-					</a> */}
 					{session ? (
 						<>
-							<p>Xin chào, {session.user.name}</p>
+							<p className='text-gray-700 hover:text-black'>
+								Xin chào, {session.user.name}
+							</p>
 							<button
-								onClick={() => signOut()}
-								className='mt-4 px-4 py-2 bg-red-500 text-white rounded'
+								onClick={() => {
+									signOut();
+								}}
+								className='bg-blue-500 text-white px-4 py-2 rounded-md cursor-pointer'
 							>
 								Đăng xuất
 							</button>
@@ -50,7 +51,7 @@ export default function Header() {
 					) : (
 						<button
 							onClick={() => signIn('google')}
-							className='px-6 py-3 bg-blue-500 text-white rounded-lg'
+							className='px-6 py-3 bg-blue-500 text-white rounded-lg cursor-pointer'
 						>
 							Đăng nhập với Google
 						</button>

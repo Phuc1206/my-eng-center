@@ -11,7 +11,8 @@ const LoginModal = dynamic(() => import('./LoginModal'), { ssr: false });
 const RegisterModal = dynamic(() => import('./RegisterModal'), { ssr: false });
 export default function Header() {
 	const dispatch = useDispatch();
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
+
 	const isLoginModalOpen = useSelector((state) => state.modal.isLoginModalOpen);
 	const isRegisterModalOpen = useSelector(
 		(state) => state.modal.isRegisterModalOpen

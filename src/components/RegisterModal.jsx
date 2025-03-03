@@ -4,6 +4,7 @@ import {
 	openLoginModal,
 	closeRegisterModal,
 } from '../redux/features/modalSlice';
+import { registerUser } from '../services/authService';
 import { useState } from 'react';
 
 export default function RegisterModal() {
@@ -21,22 +22,18 @@ export default function RegisterModal() {
 		setError(null);
 
 		const formData = new FormData(e.target);
-		const res = await fetch('/api/auth/register', {
-			method: 'POST',
-			body: JSON.stringify({
-				email: formData.get('email'),
-				password: formData.get('password'),
-				name: formData.get('name'),
-			}),
-			headers: { 'Content-Type': 'application/json' },
+		const res = await registerUser({
+			name: formData.get('name'),
+			email: formData.get('email'),
+			password: formData.get('password'),
 		});
 
-		if (res.ok) {
+		if (res.success) {
 			// Đóng modal đăng ký và mở modal đăng nhập
 			dispatch(closeRegisterModal());
 			dispatch(openLoginModal());
 		} else {
-			setError('Đăng ký thất bại! Hãy thử lại.');
+			setError(res.error);
 		}
 		setLoading(false);
 	};

@@ -1,7 +1,11 @@
+'use server';
 import pool from '../db'; // Đảm bảo đúng đường dẫn
-
+import { auth } from '../auth/[...nextauth]/route';
 export async function POST(req) {
 	try {
+		if (!session) {
+			return Response.json({ message: 'Bạn chưa đăng nhập!' }, { status: 401 });
+		}
 		const body = await req.json(); // Đọc dữ liệu từ request body
 		const { fullName, email, phone, course, message } = body;
 

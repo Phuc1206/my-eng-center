@@ -1,9 +1,10 @@
 'use client';
-
+import { useEffect } from 'react';
 import { signOut, useSession } from 'next-auth/react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import dynamic from 'next/dynamic';
 import { openLoginModal } from '../redux/features/modalSlice';
+import { setSession, clearSession } from '../redux/features/sessionSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 // Import dynamic để tránh lỗi SSR khi dùng modal
@@ -12,11 +13,30 @@ const RegisterModal = dynamic(() => import('./RegisterModal'), { ssr: false });
 export default function Header() {
 	const dispatch = useDispatch();
 	const { data: session, status } = useSession();
-
 	const isLoginModalOpen = useSelector((state) => state.modal.isLoginModalOpen);
 	const isRegisterModalOpen = useSelector(
 		(state) => state.modal.isRegisterModalOpen
 	);
+	const user = useSelector((state) => state.session.user);
+	const isAuthenticated = useSelector((state) => state.session.isAuthenticated);
+	const authStatus = useSelector((state) => state.session.status);
+	useEffect(() => {
+		if (status === 'loading') {
+			dispatch(
+				setSession({ user: null, isAuthenticated: false, status: 'loading' })
+			);
+		} else if (status === 'authenticated' && session?.user) {
+			dispatch(
+				setSession({
+					user: session.user,
+					isAuthenticated: true,
+					status: 'authenticated',
+				})
+			);
+		} else {
+			dispatch(clearSession());
+		}
+	}, [status, session, dispatch]);
 	return (
 		<>
 			<header className='bg-white shadow-md p-4'>
@@ -44,10 +64,12 @@ export default function Header() {
 					</nav>
 
 					<div className='flex items-center space-x-4'>
-						{session ? (
+						{authStatus === 'loading' ? (
+							<p className='text-gray-500'>Đang tải...</p>
+						) : authStatus === 'authenticated' ? (
 							<>
 								<p className='text-gray-700 hover:text-black'>
-									Xin chào, {session.user.name}
+									Xin chào, {user?.name}
 								</p>
 								<button
 									onClick={() => signOut()}
@@ -59,7 +81,7 @@ export default function Header() {
 						) : (
 							<button
 								onClick={() => dispatch(openLoginModal())}
-								className='px-6 py-3 bg-blue-500 text-white rounded-lg cursor-pointer'
+								className='px-4 py-2 bg-blue-500 text-white rounded-md cursor-pointer'
 							>
 								Đăng nhập
 							</button>

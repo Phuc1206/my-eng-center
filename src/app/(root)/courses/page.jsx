@@ -2,7 +2,7 @@ import CourseCard from '../../../components/CourseCard';
 
 export default function Courses() {
 	return (
-		<section className='py-16 bg-gray-100'>
+		<section className='min-h-screen flex flex-col justify-center py-16 bg-gray-100'>
 			<div className='max-w-6xl mx-auto px-6 text-center'>
 				<h2 className='text-3xl font-extrabold text-blue-900'>
 					CÁC KHÓA HỌC TẠI EngCenter

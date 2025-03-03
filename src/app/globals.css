@@ -10,14 +10,17 @@
 	--foreground: #171717;
 }
 
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
-}
-
 body {
 	color: var(--foreground);
 	background: var(--background);
+	display: flex;
+	flex-direction: column;
+}
+footer {
+	margin-top: auto;
+}
+html,
+body,
+#root {
+	height: 100%;
 }

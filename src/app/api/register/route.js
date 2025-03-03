@@ -1,8 +1,9 @@
-'use server';
 import pool from '../db'; // Đảm bảo đúng đường dẫn
 import { auth } from '../auth/[...nextauth]/route';
 export async function POST(req) {
 	try {
+		const session = await auth();
+		console.log(session);
 		if (!session) {
 			return Response.json({ message: 'Bạn chưa đăng nhập!' }, { status: 401 });
 		}
